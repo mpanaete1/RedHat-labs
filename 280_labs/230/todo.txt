@@ -1,0 +1,121 @@
+[student@workstation ~]$ lab schedule-limit start
+[student@workstation ~]$ oc login -u developer -p developer https://api.ocp4.example.com:6443
+[student@workstation ~]$ oc new-project schedule-limit
+2.1. Crie um arquivo de deploy hello-limit.yaml.
+    nome:hello-limit
+    imagem:quay.io/redhattraining/hello-world-nginx:v1.0
+[student@workstation ~]$ oc create deployment hello-limit --dry-run=client --image quay.io/redhattraining/hello-world-nginx:v1.0  -o yaml > hello-limit.yaml
+2.2. Edite hello-limit.yaml para substituir a
+sai resources: {} 
+    spec:
+    containers:
+    - image: quay.io/redhattraining/hello-world-nginx:v1.0
+    name: hello-world-nginx
+    resources:
+    requests:
+    cpu: "3"
+    memory: 20Mi
+    status: {}
+2.3. Crie o novo aplicativo usando o arquivo de recurso.
+[student@workstation ~]$ oc create -f hello-limit.yaml
+[student@workstation ~]$ oc get pods
+	NAME READY STATUS RESTARTS AGE
+	hello-limit-d86874d86b-fpmrt 0/1 Pending 0 10s
+2.5. O pod não pode ser agendado porque nenhum dos nós de computação tem recursos
+suficientes de CPU. Isso pode ser verificado com a exibição de eventos de aviso.
+[student@workstation ~]$ oc get events --field-selector type=Warning
+	LAST SEEN TYPE REASON OBJECT MESSAGE
+	88s Warning FailedScheduling pod/hello-limit-d86874d86b-fpmrt 0/3
+	 nodes are available: 3 Insufficient cpu.
+3.1. Edite hello-limit.yaml para solicitar 1,2
+[student@workstation ~]$ vim hello-limit.yaml
+ requests:
+ cpu: "1200m"
+ memory: 20Mi
+3.2. Aplique as alterações ao seu aplicativo.
+[student@workstation ~]$ oc apply -f hello-limit.yaml
+[student@workstation ~]$ oc get pods
+    NAME READY STATUS RESTARTS AGE
+    hello-limit-d86874d86b-fpmrt 0/1 Terminating 0 2m19s
+    hello-limit-7c7998ff6b-ctsjp 1/1 Running 0 6s
+    Se o pod do aplicativo não é agendado, modifique o arquivo ~/DO280/labs/
+    schedule-limit/hello-limit.yaml para reduzir a solicitação de CPU para
+    1100m. 
+    Aplique as alterações novamente e verifique se o status do pod é Running.
+[student@workstation ~]$ oc scale --replicas 4 deployment/hello-limit
+    Se o pod do aplicativo ainda não for implantado, dimensione o número de pods
+    hellolimit.yaml para reduzir a solicitação de CPU para 1000m. 
+    Execute oc apply hello-limit.yaml para aplicar as
+    alterações ao executar novamente o comando oc scale para dimensionar para
+    quatro pods.
+[student@workstation ~]$ oc get pods
+    NAME READY STATUS RESTARTS AGE
+    hello-limit-d55cd65c-765s9 1/1 Running 0 12s
+    hello-limit-d55cd65c-hmblw 0/1 Pending 0 12s
+    hello-limit-d55cd65c-r8lvw 1/1 Running 0 12s
+    hello-limit-d55cd65c-vkrhk 0/1 Pending 0 12s
+[student@workstation ~]$ oc get events --field-selector type=Warning
+    LAST SEEN TYPE REASON OBJECT
+    MESSAGE
+    76s Warning FailedScheduling pod/hello-limit-d55cd65c-vkrhk 0/3
+    nodes are available: 3 Insufficient cpu.
+[student@workstation ~]$ oc delete all -l app=hello-limit
+#implantando novo aplicativo
+[student@workstation ~]$ oc create --save-config -f ~/DO280/labs/schedule-limit/loadtest.yaml
+[student@workstation ~]$ oc get routes
+[student@workstation ~]$ curl -X GET http://loadtest.apps.ocp4.example.com/api/loadtest/v1/mem/150/60
+#segunda janela
+[student@workstation ~]$ watch oc get pods
+[student@workstation ~]$ curl -X GET http://loadtest.apps.ocp4.example.com/api/loadtest/v1/mem/200/60
+[student@workstation ~]$ oc delete all -l app=loadtest
+[student@workstation ~]$ oc login -u admin -p redhat
+[student@workstation ~]$ oc create quota project-quota --hard cpu="3",memory="1G",configmaps="3" -n schedule-limit
+[student@workstation ~]$ oc login -u developer -p developer
+[student@workstation ~]$ oc create configmap my-config1 --from-literal key1=value2
+[student@workstation ~]$ oc create configmap my-config2 --from-literal key1=value2
+[student@workstation ~]$ oc create configmap my-config3 --from-literal key1=value2
+[student@workstation ~]$ oc create configmap my-config4 --from-literal key1=value2
+    Error from server (Forbidden): configmaps "my-config4" is forbidden: exceeded
+    quota: project-quota, requested: configmaps=1, used: configmaps=3, limited:
+    configmaps=3
+[student@workstation ~]$ oc login -u admin -p redhat
+#ajustando template
+[student@workstation ~]$ oc adm create-bootstrap-project-template -o yaml > project-template.yaml
+Ajustar:
+    - apiVersion: v1
+    kind: ResourceQuota
+    metadata:
+    name: ${PROJECT_NAME}-quota
+    spec:
+    hard:
+    cpu: 3
+    memory: 10G
+
+    - apiVersion: v1
+    kind: LimitRange
+    metadata:
+    name: ${PROJECT_NAME}-limits
+    spec:
+    limits:
+    - type: Container
+    defaultRequest:
+    cpu: 30m
+    memory: 30M
+nota
+O arquivo /home/student/DO280/solutions/schedule-limit/projecttemplate.yaml contém a configuração correta e pode ser usado para
+comparação.
+[student@workstation ~]$ oc -n openshift-config create -f /tmp/project-template.yaml
+#applications.pdf
+[student@workstation ~]$ oc edit projects.config.openshift.io/cluster
+    spec:
+    projectRequestTemplate:
+    name: project-request
+10.6. Após uma alteração bem-sucedida, os pods apiserver no namespace
+openshift-apiserver são recriados.
+[student@workstation ~]$ watch oc get pods -n openshift-apiserver
+[student@workstation ~]$ oc new-project template-test
+[student@workstation ~]$ oc get resourcequotas,limitranges
+11.1. Exclua o projeto de schedule-limit.
+[student@workstation ~]$ oc delete project schedule-limit
+[student@workstation ~]$ oc delete project template-test
+[student@workstation ~]$ lab schedule-limit finish

@@ -1,0 +1,70 @@
+[~]$ lab auth-provider start
+[~]$ source /usr/local/etc/ocp4.config
+[~]$ htpasswd -c -B -b ~/DO280/labs/auth-provider/htpasswd admin redhat
+[~]$ htpasswd -b ~/DO280/labs/auth-provider/htpasswd developer developer
+[~]$ cat ~/DO280/labs/auth-provider/htpasswd
+[~]$ oc login -u kubeadmin -p ${RHT_OCP4_KUBEADM_PASSWD} https://api.ocp4.example.com:6443
+[~]$ oc create secret generic localusers --from-file htpasswd=/home/student/DO280/labs/auth-provider/htpasswd -n openshift-config
+
+2.3. Atribua o usuário admin à função cluster-admin.
+[~]$ oc adm policy add-cluster-role-to-user cluster-admin admin
+
+3.1. Exporte o recurso OAuth existente para um arquivo chamado oauth.yaml e criar identityProvider
+[~]$ oc get oauth cluster -o yaml > ~/DO280/labs/auth-provider/oauth.yaml
+    identityProviders:
+    - htpasswd:
+[~]$ oc replace -f ~/DO280/labs/auth-provider/oauth.yaml
+[~]$ oc login -u admin -p redhat
+[~]$ oc get nodes
+[~]$ oc login -u developer -p developer
+[~]$ oc get nodes
+    Error from server (Forbidden): nodes is forbidden: User "developer" cannot list
+    
+4.5. Faça login como o usuário admin e liste os usuários atuais.
+[~]$ oc login -u admin -p redhat
+[~]$ oc get users
+    NAME UID FULL NAME IDENTITIES
+    admin 31f6ccd2-6c58-47ee-978d-5e5e3c30d617 myusers:admin
+    developer d4e77b0d-9740-4f05-9af5-ecfc08a85101 myusers:developer
+[~]$ oc get identity
+    NAME IDP NAME IDP USER NAME USER NAME USER UID
+    myusers:admin myusers admin admin 31f6ccd2-6c58-47...
+    myusers:developer myusers developer developer d4e77b0d-9740-4f...
+
+5. Com o usuário admin, crie um novo usuário HTPasswd chamado manager com a senha redhat.
+[~]$ oc extract secret/localusers -n openshift-config --to ~/DO280/labs/auth-provider/ --confirm 
+[~]$ htpasswd -b ~/DO280/labs/auth-provider/htpasswd manager redhat
+[~]$ cat ~/DO280/labs/auth-provider/htpasswd
+[~]$ oc set data secret/localusers --from-file htpasswd=/home/student/DO280/labs/auth-provider/htpasswd -n openshift-config
+[~]$ oc login -u manager -p redhat
+
+6.1. Com o usuário manager, crie um novo projeto auth-provider.
+[~]$ oc new-project auth-provider
+[~]$ oc login -u developer -p developer
+[~]$ oc delete project auth-provider
+    Error from server (Forbidden): projects.project.openshift.io "auth-provider"
+[~]$ oc login -u admin -p redhat
+[~]$ oc extract secret/localusers -n openshift-config --to ~/DO280/labs/auth-provider/ --confirm
+[~]$ MANAGER_PASSWD="$(openssl rand -hex 15)"
+[~]$ htpasswd -b ~/DO280/labs/auth-provider/htpasswd manager ${MANAGER_PASSWD}
+[~]$ oc set data secret/localusers --from-file htpasswd=/home/student/DO280/labs/auth-provider/htpasswd -n openshift-config
+[~]$ oc login -u manager -p ${MANAGER_PASSWD}
+[~]$ oc login -u admin -p redhat
+[~]$ oc extract secret/localusers -n openshift-config --to ~/DO280/labs/auth-provider/ --confirm
+[~]$ htpasswd -D ~/DO280/labs/auth-provider/htpasswd manager
+[~]$ oc set data secret/localusers --from-file htpasswd=/home/student/DO280/labs/auth-provider/htpasswd -n openshift-config
+[~]$ oc delete identity "myusers:manager"
+[~]$ oc delete user manager
+[~]$ oc login -u manager -p ${MANAGER_PASSWD}
+    Login failed (401 Unauthorized)
+[~]$ oc get users
+[~]$ oc get identity
+[~]$ oc extract secret/localusers -n openshift-config --to -
+[~]$ oc login -u kubeadmin -p ${RHT_OCP4_KUBEADM_PASSWD}
+[~]$ oc delete project auth-provider
+[~]$ oc edit oauth
+    spec: {}
+[~]$ oc delete secret localusers -n openshift-config
+[~]$ oc delete user --all
+[~]$ oc delete identity --all
+[~]$ lab auth-provider finish

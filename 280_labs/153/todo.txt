@@ -1,0 +1,73 @@
+[~]$ lab network-sdn start
+[~]$ oc login -u developer -p developer https://api.ocp4.example.com:6443
+[~]$ oc new-project network-sdn
+[~]$ cd ~/DO280/labs/network-sdn
+[~]$ ls
+    db-data.sql todo-db.yaml todo-frontend.yaml
+[~]$ oc create -f todo-db.yaml
+[~]$ oc status
+[~]$ oc get pods
+#transferindo arquivos para o POD
+[~]$ oc cp db-data.sql mysql-94dc6645b-hjjqb:/tmp/
+#de dentro do pod, importar .sql
+[~]$ oc rsh mysql-94dc6645b-hjjqb bash
+    bash-4.4$ mysql -u root items < /tmp/db-data.sql
+    bash-4.4$ mysql -u root items -e "show tables;"
+    +-----------------+
+    | Tables_in_items |
+    +-----------------+
+    | Item |
+    +-----------------+
+    bash-4.4$ exit
+    exit
+#criando o frontend
+[~]$ oc create -f /home/student/DO280/labs/networksdn/todo-frontend.yaml
+[~]$ oc get pods
+#criando uma rota
+[~]$ oc expose service frontend --hostname todo.apps.ocp4.example.com
+[~]$ oc get routes
+4.3. Na workstation, abra o Firefox e acesse http://todo.apps.ocp4.example.com/todo/. Certifique-se de adicionar a barra à
+    O aplicativo não está acessível, como mostrado na captura de tela a seguir.
+4.4. Inspecione os logs do pod para ver se há erros. A saída não indica erros.
+[~]$ oc logs frontend-57b8b445df-f56qh
+#debungado via IP
+[~]$ oc get service/mysql -o jsonpath="{.spec.clusterIP}{'\n'}"
+#testando acesso ao mysql
+[~]$ oc debug -t deployment/frontend
+    sh-4.4$
+        sh-4.4$ curl -v telnet://172.30.103.29:3306
+        sh-4.4$ exit
+    exit
+[~]$ oc get service/frontend -o jsonpath="{.spec.clusterIP}{'\n'}"
+#testando acesso ao frontend
+[~]$ oc debug -t deployment/mysql --image registry.access.redhat.com/ubi8/ubi:8.4
+    sh-4.4$ curl -m 10 -v http://172.30.23.147:8080
+        curl: (28) Connection timed out after 10000 milliseconds
+    sh-4.4$ exit
+    exit
+[~]$ oc get pods -o wide -l name=frontend
+[~]$ oc debug -t deployment/mysql --image registry.access.redhat.com/ubi8/ubi:8.4
+sh-4.4$ curl -v http://10.128.2.61:8080/todo/
+    < HTTP/1.1 200 OK
+[~]$ oc get svc
+[~]$ oc describe svc/frontend
+    Endpoints: <none>
+    Saida indica que o serviço não tem ponto de extremidade
+[~]$ oc describe deployment/frontend | grep Labels -A1
+Labels: app=todonodejs
+ name=frontend
+--
+ Labels: app=todonodejs
+ name=frontend
+[~]$ oc edit svc/frontend
+    selector:
+    name: frontend
+    service/frontend edited
+[~]$ oc describe svc/frontend
+    Endpoints: 10.128.2.61:8080
+    Agora tem saida
+    http://todo.apps.ocp4.example.com/todo/.
+[~]$ cd
+[~]$ oc delete project network-sdn
+importante para garantir que recursos de exercícios anteriores não afetem exercícios futuros.
+[~]$ lab network-sdn finish

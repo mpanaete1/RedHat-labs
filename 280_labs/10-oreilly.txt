@@ -1,0 +1,196 @@
+static pods 
+kublet
+cri-o
+deployconfig - oc
+deploymento- original kub
+------------------------
+Workding with project
+oc get ns ## nem todos acessam
+oc logs podname
+source <(oc completion bash)
+oc api-resources
+https://github.com/sandervanvugt/ex280
+oc explain pod.spec
+oc describe pod localvol
+oc explain pv.spec
+oc exec --env
+#para descobrir qual scc usar
+oc get pods -o yaml | oc adm policy scc-subject-revi -f -
+----------------------------------
+sourc <(oc completion)
+oc set env -h
+oc set volumes -h 
+oc set reources -h
+oc adm -j
+oc create quota -h
+----------------------------------------------------------------------------
+######################################
+--------------------------------------
+10.3 : Setting up Authentication
+----------------------------------------------------------------------------
+htpasswd -b arquivo usuario senha
+oc create secret generic sec-users --from=htpasswd=arquivo -n openshift-config
+oc get oauth -o yaml > oauth.yaml
+	edit oauth.yaml
+		IdentityProvider
+oc replace -f oauth.yaml
+oc adm policy add-cluster-role-to-user cluster-admin ninja
+oc delete secrets kubemadmin -n kube-system
+oc groups new grupo
+oc groups add-users grupo oreia
+--------------------------------------
+10.4 : Setting up Autorization
+--------------------------------------
+oc describe clusterrole.rbac | ^Name | grep -v 'system:'
+oc adm policy add-cluster-role-to-group A
+oc adm policy adm-cluster-role-to-group cluster-admin admins
+oc adm policy add-role-to-user view ninja -n test-namespace
+----------------------------------------------------------------------------
+10.5 : Creating a Project Template
+----------------------------------------------------------------------------
+oc adm create-boostrap-project-template -o yaml > template.yaml
+	kind: Project
+		metadata:
+			labels:
+				name: ${PROJECT_NAME}
+	- apiVersion: v1
+		kind: NetworkPolicy
+		metadata:
+			name: allow-from-openhift-ingress
+		spec: {}
+	- apiVersion :v1
+		kind: NetworkPolicy
+		metadata:
+			name: allow-same-space
+		spec: {}
+	- apiVersion: v1
+		kind: LimitRange
+		metadata:
+			name: resource-limits
+		spec: {}
+	- apiVersion: v1
+		kind: ResourceQuota
+		metadata:
+			name: resource-quota
+		spec: {}
+oc -n openshift-config create -f template.yaml
+oc -n openshift-config get template
+oc edit project.config.openshift.io/cluster 
+	spec:
+		projectRequestTemplate:
+			name: project-template
+oc -n openshift-apiserver get pods
+----------------------------------------------------------------------------
+10.6 : Creating a Project
+----------------------------------------------------------------------------
+oc new-project local-project
+oc describe local-project
+	#limites definidos no template
+----------------------------------------------------------------------------
+10.7 : Running a TLS Secured Application
+----------------------------------------------------------------------------
+#--docker-mage=sandervanvugt/openhift # docker pull sandervanvugt/openshift
+openssl genrsa -des3 -out myCA.key 2048 
+openssl req -x509 -new -nodes -key=myCA.key -sha256 -days=3650 -out=myCA.pem
+	CN=crcn.ecample.com
+
+openssl genrsa -des3 -out tls.key 2048
+openssl req -new -key=tls.key -out tls.csr
+	secure-app-my-project.apps-crc.testing
+
+#self sign
+openssl x509 -req -in tls.csr -CA myCA.pem -CAKey=myCA.key -CAcreateserial -out=tls.crt -days 1650 -sha256
+
+oc new-app --name=myapp --docker-image=registry.image
+oc create secret tls secure-app-tls --cert=tls.crt --key=tls.key
+oc set volumes deployment/secure-app -type=secret --secret-name secure-app-tls --mount-path=path
+----------------------------------------------------------------------------
+10.8 : Creating a passthrough Route
+----------------------------------------------------------------------------
+#https://www.vertica.com/docs/9.2.x/HTML/Content/Authoring/Security/SSL/GeneratingCertificationsAndKeys.htm
+#https://github.com/sandervanvugt/ex280/blob/master/linginx-v2.yaml
+#https://github.com/sandervanvugt/ex280/blob/master/default.conf
+
+openssl genrsa -out lab6.key 2048
+openssl req -new -key=lab6.key out=lab.csr
+openssl x509 -req -in=lab6.csr -CA=myCA.pem -CAkey=myCA.key -CAcreateserial -out=lab6.crt --days=1650 -sha256
+
+oc create secret linginx-certs --cert=lab6.crt --key=lab6.key
+oc create cm nginxconfigmap --from-file default.conf 
+oc create sa linginx-sa 
+oc adm policy add-scc-to-user anyuid -z linginx-sa
+oc create route passthrough linginx --service linginx2 --port 8443 --hostname=linginx-default.apps-
+	curl : welcompage
+---------------------------------
+
+
+
+----------------------------------------------------------------------------
+10.9 : Configuring autoscale
+----------------------------------------------------------------------------
+oc create deployment bitginx --image=bitnami/nginx --replicas=4
+oc autoscale deployment bitginx --min=1 --max=5 --cpu-percent=70
+----------------------------------------------------------------------------
+10.10 : Configuring MySQL
+----------------------------------------------------------------------------
+#direcionar para um node como framengo:campeao
+oc create secret generic mysql --from-literal=passsword=passwod
+oc new-app --name=mysql --docker-image=mysql
+oc set env deploy/mysql --prefix=MYSQL_ROOT_ from=secret/mysql
+oc set volumes deploy/mysql --name=mysql-pvc type=pvc --claim-size=1Gi --claim-mode=rwo --mount-path=/mnt
+edit:
+	deploy/mysql.spec.nodeSelector
+								framengo:campeao
+
+----------------------------------------------------------------------------
+10.11 : Configuring Wordpress
+----------------------------------------------------------------------------
+oc new-app --name=wordpress --docker-image=wordpress
+oc create sa wordpress-sa
+oc adm policy add-scc-to-user anyuid -z wordpress-sa
+oc set sa deploy/wordpress wordpress-sa
+oc create cm wordpress-cm --from-literal=host=mysql --from-literal=name=wordpress --from-literal=user=root --from-literal=password=password
+oc set env deploy/wordpress --prefix=WORDPRESS_DB_ --from=cm/wordpress-cm
+oc get quota 
+oc delete quota
+
+
+
+
+
+bitnami/nginx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+062 - lab install-troubleshoot start
+073 - lab install-storage start
+088 - lab auth-provider start
+101 - lab auth-rbac start # sem pasta
+107 - lab auth-review start
+123 - lab authorization-secrets start # sem pasta
+132 - lab authorization-scc start # sem pasta
+136 - lab authorization-review start # sem pasta
+153 - lab network-sdn start 
+168 - lab network-ingress start
+182 - lab network-policy start
+191 - lab network-review start
+213 - lab schedule-pods start 
+230 - lab schedule-limit start
+244 - lab schedule-scale start
+250 - lab schedule-review start
+282 - lab console-admin start # semp pasta
+294 - lab console-workloads start
+307 - lab console-metrics start
+312 - lab console-review start
+328 - lab review-troubleshoot start
+342 - lab review-template start

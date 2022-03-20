@@ -1,0 +1,19 @@
+source /usr/local/etc/ocp4.config
+
+git config --global credential.helper cache
+
+git config --global alias.cmp '!f() { git add -A && git commit -m "$@" && git push; }; f'
+
+
+Username	RHT_OCP4_DEV_USER	keyfeq
+Password	RHT_OCP4_DEV_PASSWORD	19d0fdcf490949bb9acf
+API Endpoint	RHT_OCP4_MASTER_API	https://api.na46.prod.nextcle.com:6443
+Console Web Application		https://console-openshift-console.apps.na46.prod.nextcle.com
+Cluster Id		7893eba2-9940-4d42-8bc5-e734eb8cf02d
+----------------------------------------------------------------------
+
+oc login -u 
+
+login e comandos
+
+

@@ -1,0 +1,72 @@
+lab review-template start
+1. Com o usuário admin, atualize o cluster do OpenShift para usar um novo template de
+    projeto. O template do projeto deve criar automaticamente a política de rede, o intervalo
+    de limites e adicionar recursos de cota para novos projetos. Novos projetos devem ter
+    automaticamente um rótulo que corresponda ao nome do projeto. Por exemplo, um projeto
+    chamado test tem o rótulo name=test.
+
+Projeto • Inclui um rótulo com o nome do projeto.
+    NetworkPolicy Política 1:
+        • As rotas são acessíveis ao tráfego externo. Isso significa
+        que o tráfego é permitido a partir de pods em namespaces
+        com o rótulo network.openshift.io/policygroup=ingress.
+        Política 2:
+        • Os pods no mesmo namespace podem se comunicar uns
+        com os outros.
+        • Os pods não respondem a pods que existem em um
+        namespace diferente, exceto namespaces com o rótulo
+        network.openshift.io/policy-group=ingress.
+    LimitRange 
+        #numeros default maiores, causa erro
+        (requests)
+        • Cada contêiner solicita 30 millicores de CPU.
+        • Cada contêiner solicita 30 MiB de memória.
+        (default)
+        • Cada contêiner é limitado a 100 millicores de CPU.
+        • Cada contêiner é limitado a 100 MiB de memória.
+    ResourceQuota
+        # applications.pdf
+            - hard.request.cpu
+            - hard.limits.memory
+        • Os projetos são limitados a 10 pods.
+        • Os projetos podem solicitar, no máximo, 1 GiB de memória.
+        • Os projetos podem solicitar, no máximo, 2 CPUs.
+        • Os projetos podem solicitar, no máximo, 4 GiB de memória.
+        • Os projetos podem usar, no máximo, 4 CPUs.
+2. Com o usuário developer, crie um projeto chamado review-template. Garanta que
+o projeto review-template herde as configurações especificadas no novo template de
+projeto. No novo projeto review-template, crie uma implantação chamada hello
+usando a imagem de contêiner localizada em quay.io/redhattraining/hello-world-secure:v1.0
+
+nota
+O pod hello-secure não é executado com êxito até você conceder acesso ao
+certificado TLS e a chave necessários pelo servidor NGINX.
+
+3. Com o usuário developer, crie um segredo TLS usando o certificado hello-securecombined.pem e a chave hello-secure-key.pem localizados no diretório ~/DO280/
+labs/review-template/. Use os logs do pod hello-secure com falha para determinar
+o ponto de montagem esperado para o certificado. Monte o segredo TLS como um volume
+no pod usando o diretório identificado. Verifique se o pod hello-secure é reimplantado
+com êxito.
+
+4. O certificado hello-secure-combined.pem é válido para um único nome de host. Use
+o comando openssl x509 com as opções -noout e -ext 'subjectAltName' para ler
+o certificado hello-secure-combined.pem e identifique o nome de host. Como usuário
+developer, crie uma rota pass-through para o serviço hello-secure usando o nome de
+host identificado. Verifique se a rota responde a solicitações externas.
+nota
+A página do man x509(1) fornece informações sobre o comando openssl x509.
+5. Com o usuário developer, configure a implantação hello-secure para dimensionar
+automaticamente. A implantação deve ter pelo menos um pod em execução. Se o uso médio
+de CPU exceder 80%, a implantação será dimensionada para no máximo cinco pods.
+nota
+Você pode usar o script localizado em ~/DO280/Solutions/Reviewtemplate/Test-hPa.sh para testar se a implantação é dimensionada conforme
+o esperado.
+Avaliação
+Com o usuário student na máquina workstation, use o comando lab para avaliar seu trabalho.
+Corrija todas as falhas relatadas e execute novamente o comando até que ele seja concluído com
+êxito.
+[student@workstation ~]$ lab review-template grade
+Encerramento
+Com o usuário student na máquina workstation, use o comando lab para concluir este
+exercício.
+[student@workstation ~]$ lab review-template finish

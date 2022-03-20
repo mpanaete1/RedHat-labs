@@ -1,0 +1,40 @@
+cat home/user/auth
+cat home/root/auth
+yum install http-tools
+oc get nodes
+oc get top nodes
+oc descrive master01
+oc login -u usu -p pwd
+oc get pod -n openshfit-image-registr : retorna cluster xxx
+oc logs --tail 3 -n cluster xxx
+oc -n kube-system delete secret kube-admin # ultima coisa a fazer
+oc htpasswd -b usuario.yaml usu senha
+oc get oauth cluster > oauth.yaml
+	IdentityProvider
+oc replace -f oauth.yaml
+oc adm node-logs --tail kublet master01
+oc debug node/master01
+systemctl status kubelet
+systemclt status cri-o
+crictl ps --name openvswitch
+oc get events
+skope inspect docker://registry.image
+oc get storeclass
+oc set volume deploy/xxx --add --name=pvcxxx ......
+oc detee pvc pvc/pvcxxx
+oc get storageclass
+oc new-app --name=apx --docker-image=registry.image
+oc set volumes deploy/xxx --add --name=pvcxxx .....
+oc get pvc
+oc get pv
+oc delete all --selector app=appxxx
+oc delete all -l app=appxxx
+oc set volumes 
+oc detete user amin
+oc get identities
+oc delete identity admin
+oc adm policy add-cluster-role-to-user cluster-admin admin
+oc -n openshfit-config extract secret/xxx --confirm
+oc -n openshift-config set data secret/xxx --from-file
+oc delete project prj-xxx
+oc 

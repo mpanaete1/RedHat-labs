@@ -1,0 +1,30 @@
+1. Atualize o arquivo de autenticação HTPasswd existente ~/DO280/labs/auth-review/
+    tmp_users para remover o usuário analyst. Certifique-se de que os usuários tester e
+    leader no arquivo usam a senha L@bR3v!ew. Adicione duas novas entradas ao arquivo para
+    os usuários admin e developer. Use L@bR3v!ew como a senha para cada novo usuário.
+2. Faça login no seu cluster do OpenShift como o usuário kubeadmin usando a varável
+    RHT_OCP4_KUBEADM_PASSWD definida no arquivo /usr/local/etc/ocp4.config
+    como a senha. Configure seu cluster para usar o provedor de identidade HTPasswd usando
+    os nomes de usuário e senhas definidos no arquivo ~/DO280/labs/auth-review/
+    tmp_users.
+3. Torne o usuário admin um administrador do cluster. Faça login como admin e developer
+    para verificar a configuração do usuário HTPasswd e os privilégios do cluster.
+4. Com o usuário admin, remova a habilidade de criar projetos em todo o cluster.
+    DO280-OCP4.6-pt_br-1-20210723 85
+    capítulo 3 | Configuração de autorização e autenticação
+5. Crie um grupo chamado managers e adicione o usuário leader ao grupo. Conceda
+    privilégios de criação de projeto ao grupo managers. Com o usuário leader, crie o projeto
+    auth-review.
+6. Crie um grupo chamado self-provisioner e conceda privilégios de edição no projeto
+    auth-review. Adicione o usuário developer ao grupo.
+7. Crie um grupo chamado qa e conceda privilégios de exibição no projeto auth-review.
+    Adicione o usuário tester ao grupo.
+    Avaliação
+    Na máquina workstation, execute o comando lab para avaliar seu trabalho. Corrija as falhas
+    relatadas e execute novamente o script até obter êxito.
+[student@workstation ~]$ lab auth-review grade
+Encerramento
+Na máquina workstation, use o comando lab para concluir este exercício. Esse passo é
+importante para garantir que recursos de exercícios anteriores não afetem exercícios futuros.
+[student@workstation ~]$ lab auth-review finish
+#solução: comandos e caminhos (web-console)

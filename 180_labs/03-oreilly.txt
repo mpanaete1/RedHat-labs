@@ -1,0 +1,28 @@
+----------------------------------------------------------------------------
+3 : Lab Solution Managing Images
+----------------------------------------------------------------------------
+podman search
+podman login registry
+skopeo inspect docker://registry.image
+podman pull image
+podman load -i mymage.tar
+podman save -o myimage.tar img_id
+----------------------------------------------------------------------------
+4 : Lab Solution Managing Images
+----------------------------------------------------------------------------
+sudo mkdir /srv/mysql
+sudo podman inspect registry.access.redhat.com/rhscl/mysql-57-rhel7
+sudo chown 27:27 /srv/mysql
+sudo semanage fcontext -a -t container_file_t "/srv/mysql(/.*)?""
+sudo restorecon -Rv /srv/myssql
+sudo podman -run -d -v /srv/mysql:/var/lib/mysql -c MYSQL_ROOT_PASSWORD=root -e MYSQL_USER=ninja -e MYSQL_PASSWORD=root -e MYSQL_DATABASE=books registry.access.redhat.com/rhscl/mysql-57-rhel7
+----------------------------------------------------------------------------
+5.2 : Using podman commits
+----------------------------------------------------------------------------
+podman ps
+podman diff imagename
+podman inspect imagename
+podman commit oldimage newimage
+----------------------------------------------------------------------------
+5.3 : Building Custom Images with Dockerfile
+----------------------------------------------------------------------------

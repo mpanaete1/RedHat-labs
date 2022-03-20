@@ -1,0 +1,44 @@
+----------------------------------------------------------------------------
+8.5 : Applying Quota
+----------------------------------------------------------------------------
+oc new-project quota-test
+oc create quota q-test --hard=pods=3,cpu=100,memory=500Mi
+oc describe quota
+oc create deploy bitginx --image=bitnami/nginx:latests --replicas=4
+oc describe rs/bitgninx
+oc set resources deploy/bitgninx --requests=cpu=10m,memory=5mi --limits=cpu=50m,memory=20Mi
+oc scale deploy/bitgninx --replicas=3
+----------------------------------------------------------------------------
+8.5 : Applying Limit Range
+----------------------------------------------------------------------------
+The main diference betwen a limit range and a resource quota, is that the limit range
+specifies allowd values for individual resources, whereas project quota set the maximum
+values that can be used by all resources in a projet
+----------
+oc new-project limits
+oc explain limitrange.spec.limits
+----------------------------------------------------------------------------
+8.7 : Specifyng Quota Range
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+8.8 : Modifyng Default Template
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+8.9 : Using Pod Affininty and Andi-affinity Rules
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+8.9 : Managin Taints and Tolerations
+----------------------------------------------------------------------------
+# Taints to Nodes
+# Tolerations to Pods
+----------------------------------------------------------------------------
+8 Lab Using Quota
+----------------------------------------------------------------------------
+oc create quota qtest --hard=pods=4,memory=1Gi
+
+############################################################################
+Quota: Applications > Quotas
+Autosacler: Nodes >> Working With Pods >> Automatically saling Pods
+Project Templates: Applications > Projects > Configuring project creation
+
+

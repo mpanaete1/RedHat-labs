@@ -1,0 +1,41 @@
+# testando cred 2
+
+git config --global credential.helper cache
+
+git config --global alias.cmp '!f() { git add -A && git commit -m "$@" && git push; }; f'
+
+
+RHT_OCP4_MASTER_API=https://api.ocp4.example.com:6443
+RHT_OCP4_WILDCARD_DOMAIN=apps.ocp4.example.com
+RHT_OCP4_KUBEADM_PASSWD=waoWn-5S9VM-6cSsy-kMAyk
+RHT_OCP4_USER_PASSWD=redhat
+
+https://console-openshift-console.apps.ocp4.example.com
+git clone https://github.com/jrvpontes/DO180-apps
+
+oc login -u kubeadmin -p waoWn-5S9VM-6cSsy-kMAyk https://api.ocp4.example.com:6443
+
+oc login -u kubeadmin -p waoWn-5S9VM-6cSsy-kMAyk
+
+oc login -u developer -p redhat
+
+
+oc get resourcequotas,limitranges
+
+
+oc new-app --name=wordpress quay.io/redhattraining/wordpress:5.7-php7.4-apache e WORDPRESS_DB_HOST=mysql e WORDPRESS_DB_NAME=wordpress e WORDPRESS_TITLE=auth-review e WORDPRESS_USER=wpuser e WORDPRESS_PASSWORD=redhat123 
+e WORDPRESS_EMAIL=student@redhat.com e WORDPRESS_URL=wordpressreview.apps.ocp4.example.com
+
+
+
+
+/C=US/ST=North Carolina/L=Raleigh/O=Red Hat/CN=todo-https.apps.ocp4.example.com
+
+
+Bug - lab auth-review grade
+oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
+oc adm policy add-cluster-role-to-group self-provisioner managers
+
+
+
+

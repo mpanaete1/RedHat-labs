@@ -1,0 +1,166 @@
+cat home/user/auth/kubeconfig
+cat home/root/auth/kubeconfig
+yum install httpd-tools
+oc get nodes
+oc adm top nodes
+oc describe node master01
+oc login -u admin -p admin
+oc get pod -n openshift-image-registry : retorna cluster-xxx
+oc logs --tail 3 -n openshift cluster-xxx
+oc delete secret kubeadmin -n kube-system #ultima ativade da prova
+htpasswd -b usuarios.txt admin admin
+oc get oauth cluster -o yaml > oauth.yaml
+    IdentityProvider
+oc replace -f oauth.yaml
+oc adm node-logs --tail 1 kublet master01
+oc debug node/master01
+systemctl status kubelet
+systemclt status cri-o
+crictl ps --name openvswitch
+oc get events
+skopeo inspect docker://registy.image
+oc get storageclass
+oc set volumes deploy/app --add --name,type,class-claim,claim-mode,claim-size,mount-path,claim-name
+oc delete pvc/xxx
+oc get storage class
+oc new-app --name xxs --docker-image:registry.image
+oc set volumes deploy/xxx --add --name,type....
+oc get pvc
+oc get pv
+oc delete all --selector app=xxx
+oc delete all -l app=xxx
+oc set volumes deploy/app --add --name=xxx --type=pvc ....
+oc set data secret/xx --from-file=htpassed=usuario.txt -n openshfit-config
+oc delete user admin
+oc get identities
+oc delete identity
+oc adm policy add-cluster-role-to-user cluster-admin admin
+oc -n openshift-config extract secret/xxx --confirm
+oc -n openshift-config set data secret/xxx --from-file=
+oc delete project prj-xxx
+oc -n openshift-config delete secret/xxx
+oc get clusterrolebinding -o wide
+oc describe clusterrolebinding self-provisioners
+oc adm policy remove-cluster-role-from-group self-provisioners system:authenticated:oauth
+oc adm policy add-role-to-user admin leader
+oc adm groups new dev-group
+oc adm groups add-users dev-group developer
+oc get groups
+oc adm policy add-role-to-group view group-xxx
+oc adm policy add-role-to-user edit user-yyy
+oc scale deploy/xxx --replicas=3
+oc adm add-cluster-role-to-group self-provisioner system:authenticated:oauth
+oc create secret generyc mysql --from-literal=var1=value1
+oc set env deploy/xxx --from secret/xxx --prefix=MYSQL_
+oc set volume deploy/xxx --add --type=secret --secret-name=xxx --mount-path=xxx
+oc rsh pod-xxx
+oc expose service/xxx 
+oc get scc
+openssl x509 -in key.pem -noout -ext 'subjectAltName'
+oc describe scc/anyuid
+oc describe dns.operator/default
+oc get network/cluster
+oc describe svc/xxx | grep Selector:
+oc create route edge service/xxx --hotname --key=xkey --cert=xcert
+openssl genresa -out x.key 2048
+openssl req -new --subj "CN" --key=x.key --out=x.csr
+openssl x509 -req in=x.csr --passin=file:f.txt -CA=x-CA.pem CAKey=x-CA.key CAcreateserial -out=x.crt --days 365 -sha256 x.ext
+oc create secret tls todo-certs --key=x.key --cert=x.crt
+oc create route passthrough nome_rota --service servicoxxx --port,hostname
+oc label namespace namespace_x rotulox=valorx
+oc get machineset -n openshift-machine-api
+oc adm new-project demo --node-selector "camada=1"
+oc annotate namespace demo openshfit.io/node-seletor="camada=1" --overwrite
+oc get nodes --show-labels
+oc label node/xxx chave=valor
+oc get label node/xxx -L chave
+oc set resources deploy/xxx --requests cpu=12,memory=34Mi --limits cpu=80,memory=100Mi
+yaml: ResourceQuota # applications-en-us.pdf
+oc create -f resource.yaml
+oc create quota dev-quota --hard services=10,cpu=1200 
+oc get resourcequota
+#projetos de propriedade qa
+oc create clusterquota user-qa --project-annotation-selector opensshifit.io/register=qa --hard pods=x ...
+#projetos com rotulo environment=qa
+oc create clusterquote env-qa --projeto-label-selector environmento=qa --hard ...
+#criando template
+oc adm create-bootstrap-project-template -o yaml > templante.yaml
+----------------------------------------------------------------
+################################################################
+#criando schedule limit
+oc new-app --dry-run=client -o yaml > projeto.deploy.yaml
+    spec.containers.resources.requests.cpu="3"
+    spec.containers.resources.requests.memory="20Mi"
+oc create -f projeto.deploy.yaml
+oc scale deploy/projeto --replicas 4
+#criando quotas
+oc create quota projeto --hard cpu="3",memory="1G" -n namespace
+################################################################
+----------------------------------------------------------------
+################################################################
+# novo aplicativo deve ser implantando em nós rotulados com tier=silver. 
+# container solicita cpu=100m memory=20Mi
+# expor uma rota porta: 80 , alvo: 8080
+oc new-app --name=xxx --docker-image=registry.xxx --dry-run=client -o yaml > projeto.deploy.yaml
+projeto.deploy.yaml
+spec.nodeSelector.tier:silver
+spec.containers.resources.requests.cpu:100
+                         .requests.memory:20
+
+oc create -f projeto.deploy.yaml
+#criando servico
+oc expose deploy/projeto --port=80 --target-port=8080
+#criando rota
+oc expose service projeto --name=projeto
+#escalando automaticamente
+oc autoscale deploy/projeto --name teste-projeto --min=2 --max=4 
+oc get hpa
+oc get hpa/teste-projeto
+#criando quota
+oc create quota z-cota --hard cpu="1",memory="2G"
+################################################################
+----------------------------------------------------------------
+################################################################
+#console web
+Workload >> Deployments
+Networking >> services
+Networking >> Routes
+Storage >> Persistent Volume Claim
+Excluir um 'ReplicaSet' com o pod da falha reduz o uso de contas
+################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

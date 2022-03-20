@@ -1,0 +1,33 @@
+Create a route that uses edge TLS termination
+
+ Specify the service (either just its name or using type/name syntax) that the generated route should expose via the --service flag.
+
+Usage:
+  oc create route edge [NAME] --service=SERVICE [flags]
+
+Examples:
+  # Create an edge route named "my-route" that exposes frontend service.
+  oc create route edge my-route --service=frontend
+  
+  # Create an edge route that exposes the frontend service and specify a path.
+  # If the route name is omitted, the service name will be re-used.
+  oc create route edge --service=frontend --path /assets
+
+Options:
+      --allow-missing-template-keys=true: If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
+      --ca-cert='': Path to a CA certificate file.
+      --cert='': Path to a certificate file.
+      --dry-run='none': Must be "none", "server", or "client". If client strategy, only print the object that would be sent, without sending it. If server strategy, submit server-side request without persisting the resource.
+      --hostname='': Set a hostname for the new route
+      --insecure-policy='': Set an insecure policy for the new route
+      --key='': Path to a key file.
+  -o, --output='': Output format. One of: json|yaml|name|go-template|go-template-file|template|templatefile|jsonpath|jsonpath-as-json|jsonpath-file.
+      --path='': Path that the router watches to route traffic to the service.
+      --port='': Name of the service port or number of the container port the route will route traffic to
+      --save-config=false: If true, the configuration of current object will be saved in its annotation. Otherwise, the annotation will be unchanged. This flag is useful when you want to perform kubectl apply on this object in the future.
+      --service='': Name of the service that the new route is exposing
+      --template='': Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
+      --validate=false: If true, use a schema to validate the input before sending it
+      --wildcard-policy='': Sets the WilcardPolicy for the hostname, the default is "None". valid values are "None" and "Subdomain"
+
+Use "oc options" for a list of global command-line options (applies to all commands).
