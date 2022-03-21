@@ -11,8 +11,9 @@ RHT_OCP4_QUAY_USER=jpontes
 oc login -u keyfeq -p 19d0fdcf490949bb9acf https://api.na46.prod.nextcle.com:6443
 
 ----------------------------------------------------------------------------------------
+#cursor volta para terminal
+git config --global pager.branch false
 git config --global credential.helper cache
-
 git config --global alias.cmp '!f() { git add -A && git commit -m "$@" && git push; }; f'
 ----------------------------------------------------------------------------------------
 
