@@ -1,0 +1,6 @@
+Username	RHT_OCP4_DEV_USER	gbignp
+Password	RHT_OCP4_DEV_PASSWORD	3f435cba836c41ccb78d
+API Endpoint	RHT_OCP4_MASTER_API	https://api.na46.prod.nextcle.com:6443
+Console Web Application		https://console-openshift-console.apps.na46.prod.nextcle.com
+Cluster Id		7893eba2-9940-4d42-8bc5-e734eb8cf02
+
