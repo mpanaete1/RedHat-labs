@@ -1,3 +1,12 @@
+source /usr/local/etc/ocp4.config
+
+git config --global credential.helper cache
+
+git config --global alias.cmp '!f() { git add -A && git commit -m "$@" && git push; }; f'
+
+-------------------------------------------------
+
+
 Username	RHT_OCP4_DEV_USER	gbignp
 Password	RHT_OCP4_DEV_PASSWORD	3f435cba836c41ccb78d
 API Endpoint	RHT_OCP4_MASTER_API	https://api.na46.prod.nextcle.com:6443
