@@ -5,56 +5,56 @@
 ------------------------------------------------------------------------------
 2 - Criação/provisionamento de serviços conteinerizados
 ------------------------------------------------------------------------------
-060 - lab container-create start
-066 - lab container-rootless start
-068 - lab container-review start
+060 - lab container-create start && sudo mv DO180/ Nuvem/180_labs/060/
+066 - lab container-rootless start && sudo mv DO180/ Nuvem/180_labs/066/
+068 - lab container-review start && sudo mv DO180/ Nuvem/180_labs/068/
 ##############################################################################
 ------------------------------------------------------------------------------
 3 - Gerencimaneto do ciclo de vida de contêiners
 ------------------------------------------------------------------------------
-082 - lab manage-lifecycle start
-090 - lab manage-storage start
-095 - lab manage-networking start
-098 - lab manage-review start
+082 - lab manage-lifecycle start && sudo mv DO180/ Nuvem/180_labs/082/
+090 - lab manage-storage start && sudo mv DO180/ Nuvem/180_labs/090/
+095 - lab manage-networking start && sudo mv DO180/ Nuvem/180_labs/095/
+098 - lab manage-review start && sudo mv DO180/ Nuvem/180_labs/098/
 ##############################################################################
 ------------------------------------------------------------------------------
 4 - Gerencimanto de imagens e contêiners
 -----------------------------------------------------------------------------
-124 - lab image-operations start
-129 - lab image-review start
+124 - lab image-operations start && sudo mv DO180/ Nuvem/180_labs/124/
+129 - lab image-review start && sudo mv DO180/ Nuvem/180_labs/129/
 ##############################################################################
 ------------------------------------------------------------------------------
 5 - Criação de imagens personalizadas de contêiner
 ------------------------------------------------------------------------------
-152 - lab dockerfile-create start
-156 - lab dockerfile-review start
+152 - lab dockerfile-create start && sudo mv DO180/ Nuvem/180_labs/152/
+156 - lab dockerfile-review start && sudo mv DO180/ Nuvem/180_labs/156/
 ##############################################################################
 ------------------------------------------------------------------------------
 6 - Implantação de aplicativos no openshift
 ------------------------------------------------------------------------------
-190 - lab openshift-resources start
-199 - lab openshift-routes start
-214 - lab openshift-s2i start
-226 - lab openshift-webconsole start
-242 - lab openshift-review start
+190 - lab openshift-resources start && sudo mv DO180/ Nuvem/180_labs/190/
+199 - lab openshift-routes start && sudo mv DO180/ Nuvem/180_labs/199/
+214 - lab openshift-s2i start && sudo mv DO180/ Nuvem/180_labs/214/
+226 - lab openshift-webconsole start && sudo mv DO180/ Nuvem/180_labs/226/
+242 - lab openshift-review start && sudo mv DO180/ Nuvem/180_labs/242/
 ##############################################################################
 ------------------------------------------------------------------------------
 7 - Implantação de aplicativos com vários contêiners
 ------------------------------------------------------------------------------
-253 - lab multicontainer-design start
-260 - lab multicontainer-application start
-271 - lab multicontainer-openshift start
-275 - lab multicontainer-review start
+253 - lab multicontainer-design start && sudo mv DO180/ Nuvem/180_labs/253/
+260 - lab multicontainer-application start && sudo mv DO180/ Nuvem/180_labs/260/
+271 - lab multicontainer-openshift start && sudo mv DO180/ Nuvem/180_labs/271/
+275 - lab multicontainer-review start && sudo mv DO180/ Nuvem/180_labs/275/
 ##############################################################################
 ------------------------------------------------------------------------------
 8 - Solução de problemas em aplicativos conteinerizados
 ------------------------------------------------------------------------------
-290 - lab troubleshoot-s2i start
-305 - lab troubleshoot-container start
-308 - lab troubleshoot-review start
+290 - lab troubleshoot-s2i start && sudo mv DO180/ Nuvem/180_labs/290/
+305 - lab troubleshoot-container start && sudo mv DO180/ Nuvem/180_labs/305/
+308 - lab troubleshoot-review start && sudo mv DO180/ Nuvem/180_labs/308/
 ##############################################################################
 ------------------------------------------------------------------------------
 9 - Revisão abrangente
 ------------------------------------------------------------------------------
-324 - lab comprehensive-review start
+324 - lab comprehensive-review start && sudo mv DO180/ Nuvem/180_labs/324/
 ##############################################################################
