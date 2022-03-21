@@ -6,22 +6,22 @@
 2 - Criação/provisionamento de serviços conteinerizados
 ------------------------------------------------------------------------------
 060 - lab container-create start && sudo mv DO180/ Nuvem/180_labs/060/
-066 - lab container-rootless start && sudo mv DO180/ Nuvem/180_labs/066/
+066 - lab container-rootless start # sem pasta
 068 - lab container-review start && sudo mv DO180/ Nuvem/180_labs/068/
 ##############################################################################
 ------------------------------------------------------------------------------
 3 - Gerencimaneto do ciclo de vida de contêiners
 ------------------------------------------------------------------------------
 082 - lab manage-lifecycle start && sudo mv DO180/ Nuvem/180_labs/082/
-090 - lab manage-storage start && sudo mv DO180/ Nuvem/180_labs/090/
+090 - lab manage-storage start # sem pasta
 095 - lab manage-networking start && sudo mv DO180/ Nuvem/180_labs/095/
 098 - lab manage-review start && sudo mv DO180/ Nuvem/180_labs/098/
 ##############################################################################
 ------------------------------------------------------------------------------
 4 - Gerencimanto de imagens e contêiners
 -----------------------------------------------------------------------------
-124 - lab image-operations start && sudo mv DO180/ Nuvem/180_labs/124/
-129 - lab image-review start && sudo mv DO180/ Nuvem/180_labs/129/
+124 - lab image-operations start # sem pastas
+129 - lab image-review start # sem pastas
 ##############################################################################
 ------------------------------------------------------------------------------
 5 - Criação de imagens personalizadas de contêiner
@@ -32,11 +32,11 @@
 ------------------------------------------------------------------------------
 6 - Implantação de aplicativos no openshift
 ------------------------------------------------------------------------------
-190 - lab openshift-resources start && sudo mv DO180/ Nuvem/180_labs/190/
-199 - lab openshift-routes start && sudo mv DO180/ Nuvem/180_labs/199/
-214 - lab openshift-s2i start && sudo mv DO180/ Nuvem/180_labs/214/
-226 - lab openshift-webconsole start && sudo mv DO180/ Nuvem/180_labs/226/
-242 - lab openshift-review start && sudo mv DO180/ Nuvem/180_labs/242/
+190 - lab openshift-resources start # sem pasta
+199 - lab openshift-routes start # sem pasta
+214 - lab openshift-s2i start # sem pasta
+226 - lab openshift-webconsole start # sem pasta
+242 - lab openshift-review start # sem pasta
 ##############################################################################
 ------------------------------------------------------------------------------
 7 - Implantação de aplicativos com vários contêiners
