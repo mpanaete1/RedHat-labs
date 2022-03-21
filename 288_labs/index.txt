@@ -1,66 +1,66 @@
 ------------------------------------------------------------------------------
 1 - Arquitetura e novos componentes
 ------------------------------------------------------------------------------
-051 - lab docker-build start
+051 - lab docker-build start && mv DO288/ Nuvem/288_labs/051/
 064 - lab deploy-image start # sem pasta
-077 - lab build-template start
-087 - lab source-build start
+077 - lab build-template start && mv DO288/ Nuvem/288_labs/077/
+087 - lab source-build start && mv DO288/ Nuvem/288_labs/087/
 ##############################################################################
 ------------------------------------------------------------------------------
 2 - Arquitetura e novos componentes
 ------------------------------------------------------------------------------
-116 - lab container-build start
-133 - lab app-config start
-141 - lab design-container start
+116 - lab container-build start && mv DO288/ Nuvem/288_labs/116/
+133 - lab app-config start && mv DO288/ Nuvem/288_labs/133/
+141 - lab design-container start && mv DO288/ Nuvem/288_labs/141/
 ##############################################################################
 ------------------------------------------------------------------------------
 3 - Gerencimaneto de imagens usando ferramentas Linux
 ------------------------------------------------------------------------------
-163 - lab external-registry start
-173 - lab expose-registry start
+163 - lab external-registry start && mv DO288/ Nuvem/288_labs/163/
+173 - lab expose-registry start && mv DO288/ Nuvem/288_labs/173/
 185 - lab image-stream start # sem pasta
-189 - lab expose-image start
+189 - lab expose-image start && mv DO288/ Nuvem/288_labs/189/
 ##############################################################################
 ------------------------------------------------------------------------------
 4 - Processo de build do Openshift
 -----------------------------------------------------------------------------
-214 - lab manage-builds start
-223 - lab trigger-builds start
-231 - lab post-commit start
-236 - lab build-app start
+214 - lab manage-builds start && mv DO288/ Nuvem/288_labs/214/
+223 - lab trigger-builds start && mv DO288/ Nuvem/288_labs/223/
+231 - lab post-commit start && mv DO288/ Nuvem/288_labs/231/
+236 - lab build-app start && mv DO288/ Nuvem/288_labs/236/
 ##############################################################################
 ------------------------------------------------------------------------------
 5 - Etapas necessarios e opcionais de uma compilação s2i - source to image
 ------------------------------------------------------------------------------
 260 - lab s2i-scripts start # sem pasta
-271 - lab apache-s2i start
-282 - lab custom-s2i start
+271 - lab apache-s2i start && mv DO288/ Nuvem/288_labs/271/
+282 - lab custom-s2i start && mv DO288/ Nuvem/288_labs/282/
 ##############################################################################
 ------------------------------------------------------------------------------
 6 - Conversão de recursos em template
 ------------------------------------------------------------------------------
-309 - lab multicontainer-helm start
-318 - lab multicontainer-kustomize start
-324 - lab multicontainer-review start
+309 - lab multicontainer-helm start && mv DO288/ Nuvem/288_labs/309/
+318 - lab multicontainer-kustomize start && mv DO288/ Nuvem/288_labs/318/
+324 - lab multicontainer-review start && mv DO288/ Nuvem/288_labs/324/
 ##############################################################################
 ------------------------------------------------------------------------------
 7 - Monitoramento de integridade
 ------------------------------------------------------------------------------
-347 - lab probes start
-358 - lab strategy start
-371 - lab app-deploy start
+347 - lab probes start && mv DO288/ Nuvem/288_labs/347/
+358 - lab strategy start && mv DO288/ Nuvem/288_labs/358/
+371 - lab app-deploy start && mv DO288/ Nuvem/288_labs/371/
 378 - lab manage-deploy start # sem pasta
 ##############################################################################
 ------------------------------------------------------------------------------
 8 - Integração de aplicativos em containers com serviços externos.
 ------------------------------------------------------------------------------
-395 - lab external-service start
-407 - lab nexus-service start
-423 - lab micro-java start
-433 - lab todo-migrate start
+395 - lab external-service start && mv DO288/ Nuvem/288_labs/395/
+407 - lab nexus-service start && mv DO288/ Nuvem/288_labs/407/
+423 - lab micro-java start && mv DO288/ Nuvem/288_labs/423/
+433 - lab todo-migrate start && mv DO288/ Nuvem/288_labs/433/
 ##############################################################################
 ------------------------------------------------------------------------------
 9 - Revisão abrangente
 ------------------------------------------------------------------------------
-446 - lab review-todo start
+446 - lab review-todo start && mv DO288/ Nuvem/288_labs/446/
 ##############################################################################
