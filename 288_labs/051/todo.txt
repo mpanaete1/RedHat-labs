@@ -1,0 +1,33 @@
+--------------------------------------------------------------
+lab docker-build start
+--------------------------------------------------------------
+##############################################################
+--------------------------------------------------------------
+criar projeto/namespace: ${RHT_OCP4_DEV_USER}-docker-build
+Criar aplicativo:
+	Nome:echo
+	Branch: https://github.com/jrvpontes/DO288-apps#docker-build 
+	Diretorio: ubi-echo
+printar as 3 ultimas linhas de log do pod 
+adicionar um contador na aplicativo
+subir
+re-build echo-x
+printar as 3 ultimas linhas de log do pod 
+grade 
+finish
+
+--------------------------------------------------------------
+##############################################################
+--------------------------------------------------------------
+oc new-project ${RHT_OCP4_DEV_USER}-docker-build
+oc new-app --name=echo --context-dir ubi-echo https://github.com/jrvpontes/DO288-apps#docker-build
+oc logs echo-xxx | tail -n 3
+vi ubi-echo/Dockerfile # add bash contador
+git push
+oc start-build echo-x
+--------------------------------------------------------------
+##############################################################
+--------------------------------------------------------------
+
+
+
