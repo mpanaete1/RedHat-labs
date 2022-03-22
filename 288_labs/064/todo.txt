@@ -1,20 +1,3 @@
-source /usr/local/etc/ocp4.config
-https://console-openshift-console.apps.na46.prod.nextcle.com
-RHT_OCP4_MASTER_API=https://api.na46.prod.nextcle.com:6443
-RHT_OCP4_WILDCARD_DOMAIN=apps.na46.prod.nextcle.com
-RHT_OCP4_NEXUS_SERVER=nexus-common.apps.na46.prod.nextcle.com
-RHT_OCP4_DEV_USER=keyfeq
-RHT_OCP4_DEV_PASSWORD=19d0fdcf490949bb9acf
-RHT_OCP4_GITHUB_USER=jrvpontes
-RHT_OCP4_QUAY_USER=jpontes
-
-oc login -u keyfeq -p 19d0fdcf490949bb9acf https://api.na46.prod.nextcle.com:6443
-
-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
-
-----------------------------------------------------------------------------------------
-########################################################################################
-
 ##############################################################
 --------------------------------------------------------------
 lab docker-build start
@@ -42,5 +25,4 @@ Developer >> Add
 Administrator >> Network >> Route
 --------------------------------------------------------------
 ##############################################################
-
 
