@@ -13,8 +13,9 @@ adicionar um contador na aplicativo
 subir
 re-build echo-x
 printar as 3 ultimas linhas de log do pod 
-grade 
-finish
+
+lab docker-build grade 
+lab docker-build finish
 
 --------------------------------------------------------------
 ##############################################################
