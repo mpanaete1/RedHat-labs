@@ -1,37 +1,8 @@
-source /usr/local/etc/ocp4.config
-https://console-openshift-console.apps.na46.prod.nextcle.com
-RHT_OCP4_MASTER_API=https://api.na46.prod.nextcle.com:6443
-RHT_OCP4_WILDCARD_DOMAIN=apps.na46.prod.nextcle.com
-RHT_OCP4_NEXUS_SERVER=nexus-common.apps.na46.prod.nextcle.com
-RHT_OCP4_DEV_USER=keyfeq
-RHT_OCP4_DEV_PASSWORD=19d0fdcf490949bb9acf
-RHT_OCP4_GITHUB_USER=jrvpontes
-RHT_OCP4_QUAY_USER=jpontes
-
-oc login -u keyfeq -p 19d0fdcf490949bb9acf https://api.na46.prod.nextcle.com:6443
-
-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
-
-----------------------------------------------------------------------------------------
-########################################################################################
-
+--------------------------------------------------------------
+lab docker-build start
+--------------------------------------------------------------
 ##############################################################
 --------------------------------------------------------------
-<<<<<<< HEAD
-lab docker-build start
-web-console 
-	criar um projeto keyfeq-deploy-image
-	deploy image: quay.io/redhattraining/php-hello-dockerfile
-		nome aplicacao: hello
-		sem rota
-	criar rota 
-		hostname:  hello-keyfeq.apps.na46.prod.nextcle.com
-		service: hell
-		porta: 8080 - 8080
-		testar o link
-
-Deletar node: DeploymentConfig ignora, jah o Deployment colocar no ar de novo
-=======
 criar projeto/namespace: ${RHT_OCP4_DEV_USER}-docker-build
 Criar aplicativo:
 	Nome:echo
@@ -42,21 +13,11 @@ adicionar um contador na aplicativo
 subir
 re-build echo-x
 printar as 3 ultimas linhas de log do pod 
+grade 
+finish
 
 lab docker-build grade 
 lab docker-build finish
->>>>>>> a830253306a3d9fbeb2e4a7c98dfbc5f7d84e2d1
 
-lab deploy-image finish
 --------------------------------------------------------------
 ##############################################################
---------------------------------------------------------------
-WebConsole
-Administrator >> Project >> Create Project
-Developer >> Add
-	ou Topology se não tiver nenhuam aplicação no Namespace/Project
-Administrator >> Network >> Route
---------------------------------------------------------------
-##############################################################
-
-
