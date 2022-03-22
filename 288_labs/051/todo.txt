@@ -17,6 +17,7 @@ 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
 
 ##############################################################
 --------------------------------------------------------------
+<<<<<<< HEAD
 lab docker-build start
 web-console 
 	criar um projeto keyfeq-deploy-image
@@ -30,6 +31,21 @@ web-console
 		testar o link
 
 Deletar node: DeploymentConfig ignora, jah o Deployment colocar no ar de novo
+=======
+criar projeto/namespace: ${RHT_OCP4_DEV_USER}-docker-build
+Criar aplicativo:
+	Nome:echo
+	Branch: https://github.com/jrvpontes/DO288-apps#docker-build 
+	Diretorio: ubi-echo
+printar as 3 ultimas linhas de log do pod 
+adicionar um contador na aplicativo
+subir
+re-build echo-x
+printar as 3 ultimas linhas de log do pod 
+
+lab docker-build grade 
+lab docker-build finish
+>>>>>>> a830253306a3d9fbeb2e4a7c98dfbc5f7d84e2d1
 
 lab deploy-image finish
 --------------------------------------------------------------
