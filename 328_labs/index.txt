@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------------
 - nenhum exercício com relevância. Apenas a apresentação do lab
 018 - Criação de um ambiente de laboratório
-035 - lab-configure && mv DO328/ Nuvem/328_labs/035/
+035 - lab-configure # sem pasta
     verificação de credenciais
 ------------------------------------------------------------------------------
 ##############################################################################
@@ -11,7 +11,7 @@
 2 - Instalação do Red Hat Openshift Service Mesh
 ------------------------------------------------------------------------------
 - Instalação dos operadores auxiliares e operador service mesh no Openshift
-045 - lab install-mesh start && mv DO328/ Nuvem/328_labs/045/
+045 - lab install-mesh start # sem pasta
 ------------------------------------------------------------------------------
 ##############################################################################
 ------------------------------------------------------------------------------
