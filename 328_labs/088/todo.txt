@@ -1,0 +1,2 @@
+# para o side car ser criado.
+    oc annotate ns rj-poc-088 istio-injection=enabled
