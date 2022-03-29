@@ -1,0 +1,15 @@
+##############################################################
+--------------------------------------------------------------
+lab container-review start
+
+imagem em segundo plano quay.io/redhattraining/httpd-parent 
+nome: httpd-basic
+tag 2.4
+encaminhar porta 8080 no host para 80 no container
+testar servidor Apache esta  sendousando conteiner httpd-basic4
+exibir 'Hello World' alterando, no container, o arquivo /var/www/html/index.html
+
+lab container-review grade
+lab container-review finish
+--------------------------------------------------------------
+##############################################################

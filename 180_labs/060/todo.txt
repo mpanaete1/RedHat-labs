@@ -1,0 +1,24 @@
+##############################################################
+--------------------------------------------------------------
+lab container-create start
+ 
+colocar um pod mysql no ar
+imagem: registry.redhat.io/rhel8/mysql-80:1
+destatochado
+parametros:
+    MYSQL_USER=user1
+    MYSQL_PASSWORD=mypa55
+    MYSQL_DATABASE=items
+    MYSQL_ROOT_PASSWORD=r00tpa55
+
+acessar mysql dentro do pod com usuári -uroot
+criar um banco chamado 'items'
+criar uma tabela Projects no banco items
+    (create_table.txt)
+executar insert na tabela 
+    id=1;name='DevOps',code='DO180'
+sair
+
+lab container-create finish
+--------------------------------------------------------------
+##############################################################
