@@ -1,0 +1,24 @@
+##############################################################
+--------------------------------------------------------------
+lab manage-lifecycle start
+
+executar:
+	imagem: registry.redhat.io/rhel8/mysql-80:1
+	nome: mysql-db 
+
+verificar logs e identificar erros
+
+executar:
+	imagem: registry.redhat.io/rhel8/mysql-80:1
+	nome: mysql
+	parametros: 
+		MYSQL_USER=user1
+		MYSQL_PASSWORD=mypa55
+		MYSQL_DATABASE=items
+		MYSQL_ROOT_PASSWORD=r00tpa55
+copiar arquivo db.sql para container/
+executar o db.sql no mysql
+executar uma query no tabela criada em 'db.sql'
+lab manage-lifecycle finish
+--------------------------------------------------------------
+##############################################################

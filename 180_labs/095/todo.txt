@@ -1,0 +1,33 @@
+##############################################################
+--------------------------------------------------------------
+lab manage-networking start
+
+executar:
+  desvinculada
+  image: registry.redhat.io/rhel8/mysql-80:1
+  nome:  mysqldb-port
+  mapear volumes e portas: 
+    host:
+      /home/student/local/mysql
+      13306
+    container: 
+      /var/lib/mysql/data      
+      3306
+  parametros:
+    MYSQL_USER=user1
+    MYSQL_PASSWORD=mypa55
+    MYSQL_DATABASE=items
+    MYSQL_ROOT_PASSWORD=r00tpa55    
+
+aplicar no container, o conteúdo do arquivo db.sql
+executer select na tabela item;
+  dentro do container
+    comando direto
+    terminal interativo
+  com o client 'local' do mysql
+
+
+lab manage-networking grade
+lab manage-networking finish
+--------------------------------------------------------------
+##############################################################
