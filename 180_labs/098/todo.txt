@@ -1,0 +1,32 @@
+##############################################################
+--------------------------------------------------------------
+lab manage-review start
+
+criar diretório: /home/student/local/mysql 
+  aplicar permissoes e contexto SELinux
+
+criar um container
+  nome: mysql-1
+  deamon: sim
+  volume: /home/student/local/mysql X /var/lib/mysql/data
+  imagem: registry.redhat.io/rhel8/mysql-80:1
+  porta: 13306 x 3306
+  variáveis de ambiente:
+    MYSQL_USER:user1
+    MYSQL_PASSWORD:mypa55
+    MYSQL_DATABASE:items
+    MYSQL_ROOT_PASSWORD:r00tpa55
+carregas os dados do arquivo db.sql
+parar o container
+criar novo container
+  - mesma coisa do primeiro, mas o nome é mysql-2
+salvar a listar de todos os containers em /tmp/my-containers
+via shel Bash, acesso o container e verifique se a tabela Item tem conteúdo.
+usando encaminhamento de portas fazer um insert:
+  description:Finished lab; done:1
+
+lab manage-review grade
+lab manage-review finish
+
+--------------------------------------------------------------
+##############################################################
